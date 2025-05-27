@@ -1,0 +1,175 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgtow0o7a0ajg"]
+
+[ext_resource type="PackedScene" uid="uid://buw71tpnt0squ" path="res://Player/player.tscn" id="1_gilti"]
+[ext_resource type="Material" uid="uid://c2iswk72spkcj" path="res://Levels/Materials/orange.tres" id="2_r8rh2"]
+[ext_resource type="Material" uid="uid://3ka5nxb6j06y" path="res://Levels/Materials/blue.tres" id="3_bpqh8"]
+[ext_resource type="Material" uid="uid://dum584rno07pv" path="res://Levels/Materials/gray.tres" id="3_yawbu"]
+[ext_resource type="Material" uid="uid://c1rsd0lrsxwif" path="res://Levels/Materials/yellow.tres" id="5_bpqh8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uq5tm"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_aqvws"]
+sky_material = SubResource("ProceduralSkyMaterial_uq5tm")
+
+[sub_resource type="Environment" id="Environment_kh3w1"]
+background_mode = 2
+sky = SubResource("Sky_aqvws")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="SandBox" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kh3w1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 3.1374, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_gilti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.47882, 1, 0)
+
+[node name="LevelObjects" type="Node3D" parent="."]
+
+[node name="Platform" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.5, 2.3)
+use_collision = true
+material = ExtResource("2_r8rh2")
+
+[node name="Platform2" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 17, 1, 2.3)
+use_collision = true
+material = ExtResource("2_r8rh2")
+
+[node name="Platform3" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 1, 16.5, 1.5, 3.3)
+use_collision = true
+material = ExtResource("2_r8rh2")
+
+[node name="Platform4" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(2, 0, 0, 0, 4, 0, 0, 0, 1, 16.5, 2, 4.3)
+use_collision = true
+material = ExtResource("2_r8rh2")
+
+[node name="Building" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 2.5, 0)
+use_collision = true
+size = Vector3(10, 5, 15)
+material = ExtResource("3_bpqh8")
+
+[node name="Building2" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 2.5, 18.5)
+use_collision = true
+size = Vector3(10, 5, 16)
+material = ExtResource("3_bpqh8")
+
+[node name="Building3" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 2.5, -19)
+use_collision = true
+size = Vector3(10, 5, 15)
+material = ExtResource("3_bpqh8")
+
+[node name="Building4" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 2.5, 0)
+use_collision = true
+size = Vector3(10, 5, 15)
+material = ExtResource("3_bpqh8")
+
+[node name="Building5" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 2.5, 18.5)
+use_collision = true
+size = Vector3(10, 5, 16)
+material = ExtResource("3_bpqh8")
+
+[node name="Building6" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 2.5, -19)
+use_collision = true
+size = Vector3(10, 5, 15)
+material = ExtResource("3_bpqh8")
+
+[node name="Floor" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(64, 1, 64)
+material = ExtResource("3_yawbu")
+
+[node name="Silo" type="CSGCylinder3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.74182, 5.505, 4.71592)
+use_collision = true
+radius = 2.752
+height = 11.01
+material = ExtResource("5_bpqh8")
+
+[node name="Silo2" type="CSGCylinder3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68458, 5.20065, 11.4049)
+use_collision = true
+radius = 4.999
+height = 1.162
+material = ExtResource("5_bpqh8")
+
+[node name="Silo4" type="CSGCylinder3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59396, 6.15091, 8.26241)
+use_collision = true
+radius = 3.264
+height = 1.162
+material = ExtResource("5_bpqh8")
+
+[node name="Silo5" type="CSGCylinder3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59396, 7.30748, 3.19546)
+use_collision = true
+radius = 3.264
+height = 1.162
+material = ExtResource("5_bpqh8")
+
+[node name="Silo6" type="CSGCylinder3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.965411, 8.44625, -0.281534)
+use_collision = true
+radius = 3.264
+height = 1.162
+material = ExtResource("5_bpqh8")
+
+[node name="Silo7" type="CSGCylinder3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98671, 9.42787, 0.149052)
+use_collision = true
+radius = 3.264
+height = 1.162
+material = ExtResource("5_bpqh8")
+
+[node name="Silo3" type="CSGCylinder3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.59621, 4.21567, 15.9647)
+use_collision = true
+radius = 4.999
+height = 1.199
+material = ExtResource("5_bpqh8")
+
+[node name="Plank" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1402, 5.10781, -9.53062)
+use_collision = true
+size = Vector3(2.7334, 0.21106, 6.43201)
+material = ExtResource("2_r8rh2")
+
+[node name="Plank3" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(-0.282392, 0, -0.959299, 0, 1, 0, 0.959299, 0, -0.282392, -15.8688, 5.03929, 14.9485)
+use_collision = true
+size = Vector3(2.7334, 0.21106, 6.43201)
+material = ExtResource("2_r8rh2")
+
+[node name="Plank2" type="CSGBox3D" parent="LevelObjects"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 5.11585, 22.939)
+use_collision = true
+size = Vector3(2.733, 0.211, 45)
+material = ExtResource("2_r8rh2")
+
+[node name="Ramp" type="CSGPolygon3D" parent="LevelObjects"]
+transform = Transform3D(3.045, 0, 0, 0, 4.73, 0, 0, 0, 4.76, 9, 0, -15.7636)
+use_collision = true
+polygon = PackedVector2Array(0, 0, 3, 1, 3, 0)
+material = ExtResource("2_r8rh2")
+
+[node name="Ramp2" type="CSGPolygon3D" parent="LevelObjects"]
+transform = Transform3D(-3.045, 0, 1.70776e-06, 0, 4.73, 0, -4.59782e-07, 0, -11.31, -9, 0, -14.1808)
+use_collision = true
+polygon = PackedVector2Array(0, 0, 3, 1, 3, 0)
+material = ExtResource("2_r8rh2")
