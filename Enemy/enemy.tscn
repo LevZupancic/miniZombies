@@ -1,10 +1,92 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkenxwf5ajfgf"]
+[gd_scene load_steps=10 format=3 uid="uid://bkenxwf5ajfgf"]
 
 [ext_resource type="Script" uid="uid://dj2vruergf5xy" path="res://Enemy/enemy.gd" id="1_2pb1h"]
+[ext_resource type="Material" uid="uid://be42i5bmf8730" path="res://Levels/Materials/red.tres" id="2_px1sc"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xjnqo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2pb1h"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_px1sc"]
+size = Vector3(0.6, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2pb1h"]
+size = Vector3(0.7, 0.2, 0.2)
+
+[sub_resource type="Animation" id="Animation_px1sc"]
+resource_name = "Attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyParts/RightArmPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.157518, 0.356996, 0.5),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.1309, 0, 0), Vector3(-0.392699, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodyParts/LeftArmPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.157518, 0.356996, 0.5),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.261799, 0, 0), Vector3(0.1309, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.166667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_am0pq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyParts/RightArmPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodyParts/LeftArmPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_am0pq"]
+_data = {
+&"Attack": SubResource("Animation_px1sc"),
+&"RESET": SubResource("Animation_am0pq")
+}
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_2pb1h")
@@ -17,3 +99,31 @@ shape = SubResource("CapsuleShape3D_2pb1h")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
+
+[node name="BodyParts" type="Node3D" parent="."]
+
+[node name="Face" type="MeshInstance3D" parent="BodyParts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00886416, 0.605487, 0.402938)
+material_override = ExtResource("2_px1sc")
+mesh = SubResource("BoxMesh_px1sc")
+
+[node name="LeftArmPivot" type="Node3D" parent="BodyParts"]
+
+[node name="LeftArm" type="MeshInstance3D" parent="BodyParts/LeftArmPivot"]
+transform = Transform3D(-4.37114e-08, 0, 1, -0.0213961, 0.999771, -9.35253e-10, -0.999771, -0.0213961, -4.37014e-08, 0.363021, 0.252601, 0.619592)
+material_override = ExtResource("2_px1sc")
+mesh = SubResource("BoxMesh_2pb1h")
+skeleton = NodePath("../../..")
+
+[node name="RightArmPivot" type="Node3D" parent="BodyParts"]
+
+[node name="RightArm" type="MeshInstance3D" parent="BodyParts/RightArmPivot"]
+transform = Transform3D(-9.75092e-05, 0.00455425, 0.99999, -0.0213959, 0.999761, -0.00455529, -0.999771, -0.0213961, -4.37014e-08, -0.338195, 0.252601, 0.619592)
+material_override = ExtResource("2_px1sc")
+mesh = SubResource("BoxMesh_2pb1h")
+skeleton = NodePath("../../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_am0pq")
+}
