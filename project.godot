@@ -13,7 +13,13 @@ config_version=5
 config/name="MiniCodZombies"
 run/main_scene="uid://bgtow0o7a0ajg"
 config/features=PackedStringArray("4.4", "Forward Plus")
+run/max_fps=300
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1200
+window/size/viewport_height=720
 
 [input]
 

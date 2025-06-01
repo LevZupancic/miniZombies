@@ -7,6 +7,7 @@ class_name Hitscan_Weapon extends Node3D
 @export var fire_rate: float = 15.0
 @export var recoil: float = 0.05
 @export var weapon_mesh: Node3D
+@export var weapon_damage: int = 15
 
 func _ready() -> void:
 	pass
@@ -19,6 +20,8 @@ func _process(delta: float) -> void:
 
 func shoot() -> void:
 	cooldown_timer.start(1.0 / fire_rate)
-	printt("Fired!", ray_cast_3d.get_collider())
+	var collider = ray_cast_3d.get_collider()
+	printt("Fired!", collider)
 	weapon_mesh.position.z += recoil
-	
+	if (collider is Enemy):
+		collider.take_damage(weapon_damage)

@@ -2,12 +2,16 @@ class_name Player extends CharacterBody3D
 
 
 const SPEED = 5.0
-var speed_multi: float = 1.0
-@export var jump_height: float = 1.0
-var mouse_motion := Vector2.ZERO
 
 @onready var camera_pivot: Node3D = $CameraPivot
+
+@export var jump_height: float = 1.0
+@export var max_hitpoints: int = 100
+
+var speed_multi: float = 1.0
+var mouse_motion := Vector2.ZERO
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var hitpoints: int = max_hitpoints
 
 func _ready() -> void:
 	# Locks the mouse to screen, so you don't go off screen, and will always listen
@@ -63,3 +67,12 @@ func handle_camera_rotation() -> void:
 		camera_pivot.rotation_degrees.x, -90.0, 90.0
 	)
 	mouse_motion = Vector2.ZERO
+
+func take_damage(damage: int) -> void:
+		hitpoints -= damage
+		if (hitpoints < 0):
+			handle_death()
+
+func handle_death() -> void:
+	print("died")
+	pass

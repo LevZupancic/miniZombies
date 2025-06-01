@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Enemy extends CharacterBody3D
 
 
 const SPEED = 5.0
@@ -8,9 +8,13 @@ const JUMP_VELOCITY = 4.5
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var attack_range: float = 1.5
+@export var max_hitpoints: int = 100
+@export var attack_damage: int = 25
+
 var player: Player
 var provoked: bool = false
 var aggro_range: float = 12.0
+var hitpoints: int = max_hitpoints
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
@@ -51,3 +55,13 @@ func look_at_target(direction: Vector3) -> void:
 	
 func attack() -> void:
 	print("Attack!")
+	player.take_damage(attack_damage)
+
+func handle_death() -> void:
+	queue_free()
+
+func take_damage(damage: int) -> void:
+		provoked = true # Automatically become agrro when hit
+		hitpoints -= damage
+		if (hitpoints < 0):
+			handle_death()
