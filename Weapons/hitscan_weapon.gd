@@ -8,6 +8,7 @@ class_name Hitscan_Weapon extends Node3D
 @export var recoil: float = 0.05
 @export var weapon_mesh: Node3D
 @export var weapon_damage: int = 15
+@export var automatic: bool = true
 @export var muzzle_flash: GPUParticles3D
 @export var sparks: PackedScene
 
@@ -15,9 +16,15 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("fire"):
-		if cooldown_timer.is_stopped():
-			shoot()
+	if automatic:
+		if Input.is_action_pressed("fire"):
+			if cooldown_timer.is_stopped():
+				shoot()
+	else:
+		if Input.is_action_just_pressed("fire"):
+			if cooldown_timer.is_stopped():
+				shoot()
+	
 	weapon_mesh.position = weapon_mesh.position.lerp(starting_weapon_position, delta * 10.0)
 
 func shoot() -> void:
