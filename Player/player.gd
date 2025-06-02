@@ -6,6 +6,7 @@ const SPEED: float = 5.0
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var damage_animation: AnimationPlayer = $ScreenEffectController/DamageTexture/DamageAnimation
 @onready var hit_animation: AnimationPlayer = $ScreenEffectController/HitTexture/HitAnimation
+@onready var game_over_menu: GameOverMenu = $GameOverMenu
 
 @export var jump_height: float = 1.0
 @export var max_hitpoints: int = 100
@@ -23,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	handle_camera_rotation()
 	# Add the gravity
 	if not is_on_floor():
-		var fall_multiplier: float = 3.0 if velocity.y < 0 else 1.0
+		var fall_multiplier: float = 2.0 if velocity.y < 0 else 1.0
 		velocity += get_gravity() * delta * fall_multiplier
 
 	# Handle jump
@@ -88,4 +89,4 @@ func take_damage(damage: int) -> void:
 
 func handle_death() -> void:
 	print("died")
-	pass
+	game_over_menu.game_over()

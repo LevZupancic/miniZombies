@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://do0tvci1mhxy7"]
 
-[ext_resource type="PackedScene" uid="uid://gswys5jaxmle" path="res://Weapons/hitscan_weapon.tscn" id="1_b7hgy"]
-[ext_resource type="PackedScene" uid="uid://djc76wonts8sv" path="res://Weapons/RifleM4.tscn" id="2_te1r4"]
+[ext_resource type="PackedScene" uid="uid://gswys5jaxmle" path="res://Weapons/hitscan_weapon.tscn" id="1_xs4oh"]
+[ext_resource type="PackedScene" uid="uid://djc76wonts8sv" path="res://Weapons/Rifles/M4/RifleM4.tscn" id="2_ggy2d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_te1r4"]
 albedo_color = Color(0.976471, 0.811765, 0.341176, 1)
@@ -29,11 +29,11 @@ scale_curve = SubResource("CurveTexture_ul1sp")
 [sub_resource type="BoxMesh" id="BoxMesh_ul1sp"]
 size = Vector3(0.03, 0.03, 0.03)
 
-[node name="Rifle" node_paths=PackedStringArray("weapon_mesh", "muzzle_flash") instance=ExtResource("1_b7hgy")]
+[node name="Rifle" node_paths=PackedStringArray("weapon_mesh", "muzzle_flash") instance=ExtResource("1_xs4oh")]
 weapon_mesh = NodePath("RifleM4A1")
 muzzle_flash = NodePath("MuzzleFlash")
 
-[node name="RifleM4A1" parent="." index="1" instance=ExtResource("2_te1r4")]
+[node name="RifleM4A1" parent="." index="1" instance=ExtResource("2_ggy2d")]
 transform = Transform3D(0.0819075, -0.0465745, -0.995551, -0.0696609, 0.996197, -0.052336, 0.994202, 0.0736377, 0.0783516, 0.15, -0.2, -0.45)
 
 [node name="SM_Assault_Rifle_5,56" parent="RifleM4A1" index="0"]

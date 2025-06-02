@@ -1,11 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://buw71tpnt0squ"]
+[gd_scene load_steps=18 format=3 uid="uid://buw71tpnt0squ"]
 
 [ext_resource type="Script" uid="uid://jxj2no3hiagn" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://chs7kldpl3trg" path="res://Player/smooth_camera.gd" id="2_4ntmi"]
 [ext_resource type="Script" uid="uid://d272hj7ob0a5v" path="res://Player/crosshair.gd" id="3_btcbx"]
-[ext_resource type="PackedScene" uid="uid://do0tvci1mhxy7" path="res://Weapons/Rifle.tscn" id="3_gwnis"]
+[ext_resource type="PackedScene" uid="uid://do0tvci1mhxy7" path="res://Weapons/Rifles/M4/Rifle.tscn" id="3_gwnis"]
 [ext_resource type="Texture2D" uid="uid://djdj1blhj2y4w" path="res://Assets/Resources/Textures/Bloody Screen Effects/Effect_5.png" id="5_k53q1"]
 [ext_resource type="Texture2D" uid="uid://bt6xibajff0ms" path="res://Assets/Resources/Textures/Bloody Screen Effects/Blood_Blur_2.png" id="6_fhl08"]
+[ext_resource type="PackedScene" uid="uid://enmfonarff1q" path="res://Player/game_over_menu.tscn" id="7_vtle1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hvfyp"]
 
@@ -226,3 +227,6 @@ texture = ExtResource("6_fhl08")
 libraries = {
 &"": SubResource("AnimationLibrary_5htga")
 }
+
+[node name="GameOverMenu" parent="." instance=ExtResource("7_vtle1")]
+visible = false

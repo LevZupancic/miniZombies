@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3o5vxwfpqgom"]
+
+[ext_resource type="PackedScene" uid="uid://bi4n4ay63r6ql" path="res://Assets/TestWeapons/SM_Hunting_Sniper_Rifle.gltf" id="1_8llox"]
+[ext_resource type="PackedScene" uid="uid://bu3x6cehiyqky" path="res://Assets/TestWeapons/SM_Sniper_Scope.gltf" id="2_j13u1"]
+[ext_resource type="PackedScene" uid="uid://dqidd8pq2gg7o" path="res://Assets/TestWeapons/SM_Magazine_For_HuntingSniper_Rifle.gltf" id="3_rmqv4"]
+
+[node name="HuntingRifle" type="Node3D"]
+
+[node name="Rifle" parent="." instance=ExtResource("1_8llox")]
+transform = Transform3D(0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, 0)
+
+[node name="SM_Hunting_Sniper_Rifle" parent="Rifle" index="0"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="Scope" parent="." instance=ExtResource("2_j13u1")]
+
+[node name="SM_Sniper_Scope" parent="Scope" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, 0.075, 0)
+
+[node name="Root Scene" parent="." instance=ExtResource("3_rmqv4")]
+
+[node name="SM_Magazine_For_HuntingSniper_Rifle" parent="Root Scene" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161274, 0.0081747, 0)
+
+[editable path="Rifle"]
+[editable path="Scope"]
+[editable path="Root Scene"]
