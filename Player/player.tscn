@@ -1,13 +1,123 @@
-[gd_scene load_steps=7 format=3 uid="uid://buw71tpnt0squ"]
+[gd_scene load_steps=17 format=3 uid="uid://buw71tpnt0squ"]
 
 [ext_resource type="Script" uid="uid://jxj2no3hiagn" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://chs7kldpl3trg" path="res://Player/smooth_camera.gd" id="2_4ntmi"]
 [ext_resource type="Script" uid="uid://d272hj7ob0a5v" path="res://Player/crosshair.gd" id="3_btcbx"]
 [ext_resource type="PackedScene" uid="uid://do0tvci1mhxy7" path="res://Weapons/Rifle.tscn" id="3_gwnis"]
+[ext_resource type="Texture2D" uid="uid://djdj1blhj2y4w" path="res://Assets/Resources/Textures/Bloody Screen Effects/Effect_5.png" id="5_k53q1"]
+[ext_resource type="Texture2D" uid="uid://bt6xibajff0ms" path="res://Assets/Resources/Textures/Bloody Screen Effects/Blood_Blur_2.png" id="6_fhl08"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hvfyp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
+
+[sub_resource type="Animation" id="Animation_vtle1"]
+resource_name = "HighDamage"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_00tjw"]
+resource_name = "LowDamage"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.333333), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_od3ui"]
+resource_name = "MediumDamage"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.666667), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fhl08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fhl08"]
+_data = {
+&"HighDamage": SubResource("Animation_vtle1"),
+&"LowDamage": SubResource("Animation_00tjw"),
+&"MediumDamage": SubResource("Animation_od3ui"),
+&"RESET": SubResource("Animation_fhl08")
+}
+
+[sub_resource type="Animation" id="Animation_x3vf3"]
+resource_name = "Hit"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_apopc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5htga"]
+_data = {
+&"Hit": SubResource("Animation_x3vf3"),
+&"RESET": SubResource("Animation_apopc")
+}
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_l8h54")
@@ -24,10 +134,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 [node name="SmoothCamera" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.2)
 top_level = true
+cull_mask = 1048573
 script = ExtResource("2_4ntmi")
 speed = 1000.0
 
 [node name="Rifle" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_gwnis")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera"]
+remote_path = NodePath("../../../SubViewportContainer/SubViewport/WeaponCamera")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1200, 720)
+render_target_update_mode = 4
+
+[node name="WeaponCamera" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.2)
+cull_mask = 2
+fov = 40.0
 
 [node name="UI" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -42,3 +176,53 @@ script = ExtResource("3_btcbx")
 line_length = 8
 line_gap = 6
 line_thickness = 1
+
+[node name="ScreenEffectController" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DamageTexture" type="TextureRect" parent="ScreenEffectController"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.3
+anchor_top = -0.25
+anchor_right = 1.3
+anchor_bottom = 1.25
+offset_left = 360.0
+offset_top = 180.0
+offset_right = 360.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("5_k53q1")
+
+[node name="DamageAnimation" type="AnimationPlayer" parent="ScreenEffectController/DamageTexture"]
+libraries = {
+&"": SubResource("AnimationLibrary_fhl08")
+}
+
+[node name="HitTexture" type="TextureRect" parent="ScreenEffectController"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 868.0
+offset_bottom = 527.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.58, 0.58)
+texture = ExtResource("6_fhl08")
+
+[node name="HitAnimation" type="AnimationPlayer" parent="ScreenEffectController/HitTexture"]
+libraries = {
+&"": SubResource("AnimationLibrary_5htga")
+}

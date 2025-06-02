@@ -9,6 +9,7 @@ class_name Hitscan_Weapon extends Node3D
 @export var weapon_mesh: Node3D
 @export var weapon_damage: int = 15
 @export var muzzle_flash: GPUParticles3D
+@export var sparks: PackedScene
 
 func _ready() -> void:
 	pass
@@ -22,8 +23,14 @@ func _process(delta: float) -> void:
 func shoot() -> void:
 	muzzle_flash.restart()
 	cooldown_timer.start(1.0 / fire_rate)
-	var collider = ray_cast_3d.get_collider()
-	printt("Fired!", collider)
 	weapon_mesh.position.z += recoil
+	handle_hit()
+
+func handle_hit() -> void:
+	var collider: Object = ray_cast_3d.get_collider()
+	printt("Fired!", collider)
 	if (collider is Enemy):
 		collider.take_damage(weapon_damage)
+	var spark: GPUParticles3D = sparks.instantiate()
+	add_child(spark)
+	spark.global_position = ray_cast_3d.get_collision_point()

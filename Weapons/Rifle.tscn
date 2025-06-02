@@ -36,8 +36,30 @@ muzzle_flash = NodePath("MuzzleFlash")
 [node name="RifleM4A1" parent="." index="1" instance=ExtResource("2_te1r4")]
 transform = Transform3D(0.0819075, -0.0465745, -0.995551, -0.0696609, 0.996197, -0.052336, 0.994202, 0.0736377, 0.0783516, 0.15, -0.2, -0.45)
 
+[node name="SM_Assault_Rifle_5,56" parent="RifleM4A1" index="0"]
+layers = 2
+
+[node name="SM_Fuse_For_Assault_Rifle_5,56" parent="RifleM4A1/SM_Assault_Rifle_5,56" index="0"]
+layers = 2
+
+[node name="SM_Gate_For_Assault_Rifle_5,56" parent="RifleM4A1/SM_Assault_Rifle_5,56" index="1"]
+layers = 2
+
+[node name="SM_Lid_Gate_For_Assault_Rifle_5,56" parent="RifleM4A1/SM_Assault_Rifle_5,56" index="2"]
+layers = 2
+
+[node name="SM_Trigger_Guard_For_Assault_Rifle_5,56" parent="RifleM4A1/SM_Assault_Rifle_5,56" index="3"]
+layers = 2
+
+[node name="SM_Magazine_For_Assault_Rifle_5,56" parent="RifleM4A1/MagRifle5,56" index="0"]
+layers = 2
+
+[node name="SM_Square_Dot_Sight" parent="RifleM4A1/SqareDotSight" index="0"]
+layers = 2
+
 [node name="MuzzleFlash" type="GPUParticles3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10362, -0.0241196, -0.913688)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.104334, -0.023613, -0.926656)
+layers = 2
 material_override = SubResource("StandardMaterial3D_te1r4")
 cast_shadow = 0
 emitting = false
@@ -48,3 +70,7 @@ fixed_fps = 60
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_sli3v")
 draw_pass_1 = SubResource("BoxMesh_ul1sp")
+
+[editable path="RifleM4A1"]
+[editable path="RifleM4A1/MagRifle5,56"]
+[editable path="RifleM4A1/SqareDotSight"]

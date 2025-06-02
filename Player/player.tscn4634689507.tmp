@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://buw71tpnt0squ"]
+
+[ext_resource type="Script" uid="uid://jxj2no3hiagn" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://chs7kldpl3trg" path="res://Player/smooth_camera.gd" id="2_4ntmi"]
+[ext_resource type="Script" uid="uid://d272hj7ob0a5v" path="res://Player/crosshair.gd" id="3_btcbx"]
+[ext_resource type="PackedScene" uid="uid://do0tvci1mhxy7" path="res://Weapons/Rifle.tscn" id="3_gwnis"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hvfyp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_l8h54")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_hvfyp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_hvfyp")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="SmoothCamera" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.2)
+top_level = true
+cull_mask = 1048573
+script = ExtResource("2_4ntmi")
+speed = 1000.0
+
+[node name="Rifle" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_gwnis")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera"]
+remote_path = NodePath("../../../SubViewportContainer/SubViewport/WeaponCamera")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1200, 720)
+render_target_update_mode = 4
+
+[node name="WeaponCamera" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.2)
+cull_mask = 2
+fov = 40.0
+
+[node name="UI" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="Control" parent="UI"]
+layout_mode = 2
+script = ExtResource("3_btcbx")
+line_length = 8
+line_gap = 6
+line_thickness = 1

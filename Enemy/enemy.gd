@@ -1,8 +1,8 @@
 class_name Enemy extends CharacterBody3D
 
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+const SPEED: float = 5.0
+const JUMP_VELOCITY: float = 4.5
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -24,13 +24,13 @@ func _process(_delta: float) -> void:
 		navigation_agent_3d.target_position = player.global_position
 
 func _physics_process(delta: float) -> void:
-	var next_position = navigation_agent_3d.get_next_path_position()
+	var next_position: Vector3 = navigation_agent_3d.get_next_path_position()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	var direction =  global_position.direction_to(next_position)
-	var distance = global_position.distance_to(player.global_position)
+	var direction: Vector3 =  global_position.direction_to(next_position)
+	var distance: float = global_position.distance_to(player.global_position)
 	
 	if (distance < aggro_range):
 		provoked = true
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func look_at_target(direction: Vector3) -> void:
-	var adjusted_direction = direction
+	var adjusted_direction: Vector3 = direction
 	adjusted_direction.y = 0
 	look_at(global_position + adjusted_direction, Vector3.UP, true)
 	
