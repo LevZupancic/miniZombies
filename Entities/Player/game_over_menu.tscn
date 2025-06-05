@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://enmfonarff1q"]
+
+[ext_resource type="FontFile" uid="uid://beo3hajnho5yb" path="res://Assets/Fonts/Rubic/Rubik-Medium.ttf" id="1_6p4a0"]
+[ext_resource type="Script" uid="uid://28v7d2it6vq7" path="res://Entities/Player/game_over_menu.gd" id="2_kxqsi"]
+[ext_resource type="Shader" uid="uid://bruvbiqia6hb5" path="res://Entities/Player/game_over_menu.tres" id="3_1bqx8"]
+
+[sub_resource type="Theme" id="Theme_kxqsi"]
+default_font = ExtResource("1_6p4a0")
+default_font_size = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o38b4"]
+shader = ExtResource("3_1bqx8")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j2bcs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6p4a0"]
+font_size = 124
+
+[node name="GameOverMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_kxqsi")
+script = ExtResource("2_kxqsi")
+
+[node name="BackgroundBlur" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_o38b4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_j2bcs")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "YOU DIED"
+label_settings = SubResource("LabelSettings_6p4a0")
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit
+"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

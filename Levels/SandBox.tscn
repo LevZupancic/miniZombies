@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://bgtow0o7a0ajg"]
 
-[ext_resource type="PackedScene" uid="uid://buw71tpnt0squ" path="res://Player/player.tscn" id="1_gilti"]
+[ext_resource type="PackedScene" uid="uid://buw71tpnt0squ" path="res://Entities/Player/player.tscn" id="1_gilti"]
 [ext_resource type="Material" uid="uid://c2iswk72spkcj" path="res://Levels/Materials/orange.tres" id="2_r8rh2"]
 [ext_resource type="Material" uid="uid://3ka5nxb6j06y" path="res://Levels/Materials/blue.tres" id="3_bpqh8"]
 [ext_resource type="Material" uid="uid://dum584rno07pv" path="res://Levels/Materials/gray.tres" id="3_yawbu"]
 [ext_resource type="Material" uid="uid://c1rsd0lrsxwif" path="res://Levels/Materials/yellow.tres" id="5_bpqh8"]
-[ext_resource type="PackedScene" uid="uid://bkenxwf5ajfgf" path="res://Enemy/enemy.tscn" id="6_qxtxs"]
+[ext_resource type="PackedScene" uid="uid://bkenxwf5ajfgf" path="res://Entities/Enemy/enemy.tscn" id="6_qxtxs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uq5tm"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)

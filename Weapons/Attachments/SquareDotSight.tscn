@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://di0omqiu0agr2"]
-
-[ext_resource type="PackedScene" uid="uid://bwpw48qnrtkk8" path="res://Assets/TestWeapons/SM_Square_Dot_Sight.gltf" id="1_rc1ey"]
-
-[node name="SqareDotSight" instance=ExtResource("1_rc1ey")]
-
-[node name="SM_Square_Dot_Sight" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
