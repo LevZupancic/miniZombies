@@ -53,15 +53,17 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
+	# TODO should be separate manager for input handling
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			mouse_motion = -event.relative * 0.005
 		if event.is_action_pressed("ui_cancel"):
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 	elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		if event.is_action_pressed("ui_cancel"):
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			
+	
 
 func handle_camera_rotation() -> void:
 	rotate_y(mouse_motion.x) # rotate camera left/right

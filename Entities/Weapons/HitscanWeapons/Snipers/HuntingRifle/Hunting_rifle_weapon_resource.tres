@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://cf0ewonftekit"]
 
-[ext_resource type="Script" uid="uid://dt3mt4p8y2hk4" path="res://Entities/Weapons/WeaponResource.gd" id="1_xcmju"]
+[ext_resource type="Script" uid="uid://dt3mt4p8y2hk4" path="res://Entities/Weapons/weapon_resource.gd" id="1_0v0k5"]
 
 [resource]
-script = ExtResource("1_xcmju")
+script = ExtResource("1_0v0k5")
 name = ""
 weapon_type = 5
 fire_type = 2
 damage = 40
-firerate = 1.0
+firerate = 2.0
 recoil = 0.1
 mag_size = 5
 max_ammo = 35

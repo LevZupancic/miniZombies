@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://jxj2no3hiagn" path="res://Entities/Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://chs7kldpl3trg" path="res://Entities/Player/smooth_camera.gd" id="2_4ntmi"]
 [ext_resource type="Script" uid="uid://d272hj7ob0a5v" path="res://Entities/Player/crosshair.gd" id="3_btcbx"]
-[ext_resource type="PackedScene" uid="uid://do0tvci1mhxy7" path="res://Entities/Weapons/HitscanWeapons/Rifles/M4A1/M4A1_scene.tscn" id="3_gwnis"]
+[ext_resource type="PackedScene" uid="uid://cuuon185488y3" path="res://Entities/Managers/WeaponManager/weapon_manager.tscn" id="4_7a1se"]
 [ext_resource type="Texture2D" uid="uid://djdj1blhj2y4w" path="res://Assets/Textures/Bloody Screen Effects/Effect_5.png" id="5_k53q1"]
 [ext_resource type="Texture2D" uid="uid://bt6xibajff0ms" path="res://Assets/Textures/Bloody Screen Effects/Blood_Blur_2.png" id="6_fhl08"]
 [ext_resource type="PackedScene" uid="uid://enmfonarff1q" path="res://Entities/Player/game_over_menu.tscn" id="7_vtle1"]
@@ -142,8 +142,6 @@ speed = 1000.0
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera"]
 remote_path = NodePath("../../../SubViewportContainer/SubViewport/WeaponCamera")
 
-[node name="M4A1" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_gwnis")]
-
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,6 +160,8 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.2)
 cull_mask = 2
 fov = 40.0
+
+[node name="WeaponManager" parent="SubViewportContainer/SubViewport/WeaponCamera" instance=ExtResource("4_7a1se")]
 
 [node name="UI" type="CenterContainer" parent="."]
 anchors_preset = 15

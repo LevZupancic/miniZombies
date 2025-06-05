@@ -12,12 +12,14 @@ class_name Weapon_Resource extends Resource
 @export var price: int
 
 enum FireType {
+	DEFAULT = 0,
 	AUTOMATIC = 1,
 	SEMIAUTO = 2,
 	MELEE = 3
 }
 
 enum WeaponType {
+	DEFAULT = 0,
 	PISTOL = 1,
 	SMG = 2,
 	RIFLE = 3,
