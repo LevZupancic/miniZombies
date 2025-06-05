@@ -25,6 +25,15 @@ gdscript/warnings/inferred_declaration=2
 window/size/viewport_width=1200
 window/size/viewport_height=720
 
+[file_customization]
+
+folder_colors={
+"res://Assets/": "yellow",
+"res://Common/": "orange",
+"res://Entities/": "blue",
+"res://Levels/": "green"
+}
+
 [input]
 
 move_forward={

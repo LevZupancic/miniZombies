@@ -35,9 +35,11 @@ func shoot() -> void:
 func handle_hit() -> void:
 	var collider: Object = ray_cast_3d.get_collider()
 	printt("Fired!", collider)
+	if (collider == null):
+		return
 	if (collider is Enemy):
 		collider.take_damage(weapon_resource.damage)
-	if (collider != null):
-		var spark: GPUParticles3D = sparks.instantiate()
-		add_child(spark)
-		spark.global_position = ray_cast_3d.get_collision_point()
+	# Handle bullet holes/sparks
+	var spark: GPUParticles3D = sparks.instantiate()
+	add_child(spark)
+	spark.global_position = ray_cast_3d.get_collision_point()

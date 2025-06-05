@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c20rdsmd2lss0"]
-
-[ext_resource type="PackedScene" uid="uid://cnd11jvrqerf5" path="res://Assets/TestWeapons/SM_Magazine_For_Assault_Rifle_5,56.gltf" id="1_nq7xg"]
-
-[node name="MagRifle5,56" instance=ExtResource("1_nq7xg")]
-
-[node name="SM_Magazine_For_Assault_Rifle_5,56" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
