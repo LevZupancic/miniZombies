@@ -20,10 +20,8 @@ enum FireType {
 
 enum WeaponType {
 	DEFAULT = 0,
-	PISTOL = 1,
-	SMG = 2,
-	RIFLE = 3,
-	LMG = 4,
-	SNIPER = 5,
-	KNIFE = 6
+	GUN = 1,
+	KNIFE = 2,
+	THROWABLE = 3,
+	SPECIAL = 4
 }

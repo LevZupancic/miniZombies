@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://cf0ewonftekit"]
 
-[ext_resource type="Script" uid="uid://dt3mt4p8y2hk4" path="res://Entities/Weapons/weapon_resource.gd" id="1_0v0k5"]
+[ext_resource type="Script" uid="uid://dt3mt4p8y2hk4" path="res://Entities/Weapons/weapon_resource.gd" id="1_p6o7v"]
 
 [resource]
-script = ExtResource("1_0v0k5")
-name = ""
-weapon_type = 5
+script = ExtResource("1_p6o7v")
+name = "Hunting rifle"
+weapon_type = 1
 fire_type = 2
 damage = 40
 firerate = 2.0

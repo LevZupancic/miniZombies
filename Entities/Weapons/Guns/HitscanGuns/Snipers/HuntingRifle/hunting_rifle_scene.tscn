@@ -1,25 +1,25 @@
 [gd_scene load_steps=11 format=3 uid="uid://cr6sdywonip20"]
 
-[ext_resource type="PackedScene" uid="uid://gswys5jaxmle" path="res://Entities/Weapons/HitscanWeapons/hitscan_weapon.tscn" id="1_42yau"]
+[ext_resource type="PackedScene" uid="uid://6f4gvsoxmprs" path="res://Entities/Weapons/Guns/HitscanGuns/hitscan_gun.tscn" id="1_ma8ep"]
 [ext_resource type="PackedScene" uid="uid://bi4n4ay63r6ql" path="res://Assets/TestWeapons/SM_Hunting_Sniper_Rifle.gltf" id="2_fosxo"]
-[ext_resource type="Resource" uid="uid://cf0ewonftekit" path="res://Entities/Weapons/HitscanWeapons/Snipers/HuntingRifle/hunting_rifle_weapon_resource.tres" id="2_rdfq6"]
+[ext_resource type="Resource" uid="uid://cf0ewonftekit" path="res://Entities/Weapons/Guns/HitscanGuns/Snipers/HuntingRifle/hunting_rifle_weapon_resource.tres" id="2_rdfq6"]
 [ext_resource type="PackedScene" uid="uid://bu3x6cehiyqky" path="res://Assets/TestWeapons/SM_Sniper_Scope.gltf" id="3_4cjma"]
 [ext_resource type="PackedScene" uid="uid://dqidd8pq2gg7o" path="res://Assets/TestWeapons/SM_Magazine_For_HuntingSniper_Rifle.gltf" id="4_i4gem"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_te1r4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_olt3q"]
 albedo_color = Color(0.976471, 0.811765, 0.341176, 1)
 emission_enabled = true
 emission = Color(1, 1, 0.164706, 1)
 emission_energy_multiplier = 3.0
 
-[sub_resource type="Curve" id="Curve_te1r4"]
+[sub_resource type="Curve" id="Curve_h4uun"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.655367, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_ul1sp"]
-curve = SubResource("Curve_te1r4")
+curve = SubResource("Curve_h4uun")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sli3v"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6qeso"]
 angle_min = 1.07288e-05
 angle_max = 1.07288e-05
 direction = Vector3(0, 0.105, -1)
@@ -29,13 +29,13 @@ initial_velocity_max = 8.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_ul1sp")
 
-[sub_resource type="BoxMesh" id="BoxMesh_ul1sp"]
+[sub_resource type="BoxMesh" id="BoxMesh_xghqf"]
 size = Vector3(0.03, 0.03, 0.03)
 
-[node name="HuntingRifle" node_paths=PackedStringArray("weapon_mesh", "muzzle_flash") instance=ExtResource("1_42yau")]
+[node name="HuntingRifle" node_paths=PackedStringArray("muzzle_flash", "weapon_mesh") instance=ExtResource("1_ma8ep")]
+muzzle_flash = NodePath("MuzzleFlash")
 weapon_resource = ExtResource("2_rdfq6")
 weapon_mesh = NodePath("Rifle")
-muzzle_flash = NodePath("MuzzleFlash")
 
 [node name="Rifle" parent="." index="2" instance=ExtResource("2_fosxo")]
 transform = Transform3D(0.0819074, -0.0465745, -0.995551, -0.0696609, 0.996197, -0.052336, 0.994202, 0.0736377, 0.0783515, 0.15, -0.2, -0.45)
@@ -67,7 +67,7 @@ layers = 2
 [node name="MuzzleFlash" type="GPUParticles3D" parent="." index="3"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.0760191, 0.00728756, -1.26269)
 layers = 2
-material_override = SubResource("StandardMaterial3D_te1r4")
+material_override = SubResource("StandardMaterial3D_olt3q")
 cast_shadow = 0
 emitting = false
 lifetime = 0.07
@@ -75,8 +75,8 @@ one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_sli3v")
-draw_pass_1 = SubResource("BoxMesh_ul1sp")
+process_material = SubResource("ParticleProcessMaterial_6qeso")
+draw_pass_1 = SubResource("BoxMesh_xghqf")
 
 [editable path="Rifle"]
 [editable path="Rifle/Scope"]

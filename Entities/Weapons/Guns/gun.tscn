@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b81c5jg4gkwy6"]
+
+[ext_resource type="Script" uid="uid://72al0fv4gm7n" path="res://Entities/Weapons/Guns/gun.gd" id="1_2vokj"]
+
+[node name="Gun" type="Node3D"]
+script = ExtResource("1_2vokj")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true

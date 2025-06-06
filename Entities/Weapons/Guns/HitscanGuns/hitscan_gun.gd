@@ -1,17 +1,10 @@
-class_name Hitscan_Weapon extends Node3D
+class_name Hitscan_Gun extends Gun
 
-@onready var cooldown_timer: Timer = $CooldownTimer
-@onready var starting_weapon_position: Vector3 = weapon_mesh.position
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
-
-@export var weapon_resource: Weapon_Resource
-
-@export var weapon_mesh: Node3D
-@export var muzzle_flash: GPUParticles3D
 @export var sparks: PackedScene
 
-func _ready() -> void:
-	pass
+func _ready():
+	print("CooldownTimer exists: ", cooldown_timer != null)
 
 func _process(delta: float) -> void:
 	if weapon_resource.fire_type ==  Weapon_Resource.FireType.AUTOMATIC:

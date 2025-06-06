@@ -7,6 +7,7 @@ const SPEED: float = 5.0
 @onready var damage_animation: AnimationPlayer = $ScreenEffectController/DamageTexture/DamageAnimation
 @onready var hit_animation: AnimationPlayer = $ScreenEffectController/HitTexture/HitAnimation
 @onready var game_over_menu: GameOverMenu = $GameOverMenu
+@onready var inventory_manager: InventoryManager = $SubViewportContainer/SubViewport/WeaponCamera/InventoryManager
 
 @export var jump_height: float = 1.0
 @export var max_hitpoints: int = 100
@@ -19,6 +20,13 @@ var hitpoints: int = max_hitpoints
 func _ready() -> void:
 	# Locks the mouse to screen, so you don't go off screen, and will always listen
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	var gun_scene = preload("res://Entities/Weapons/Guns/HitscanGuns/Rifles/M4A1/M4A1_scene.tscn")
+	inventory_manager.instantiate_weapon(gun_scene)
+	var gun_scene2 = preload("res://Entities/Weapons/Guns/HitscanGuns/Snipers/HuntingRifle/hunting_rifle_scene.tscn")
+	inventory_manager.instantiate_weapon(gun_scene2)
+
+
+	
 
 func _physics_process(delta: float) -> void:
 	handle_camera_rotation()

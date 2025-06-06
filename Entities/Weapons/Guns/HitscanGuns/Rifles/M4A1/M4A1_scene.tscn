@@ -1,23 +1,23 @@
-[gd_scene load_steps=23 format=4 uid="uid://do0tvci1mhxy7"]
+[gd_scene load_steps=23 format=4 uid="uid://qx67xvpodqmp"]
 
-[ext_resource type="PackedScene" uid="uid://gswys5jaxmle" path="res://Entities/Weapons/HitscanWeapons/hitscan_weapon.tscn" id="1_f1mxy"]
-[ext_resource type="Resource" uid="uid://dk0vorbcv0tc8" path="res://Entities/Weapons/HitscanWeapons/Rifles/M4A1/M4A1_weapon_resource.tres" id="2_ly6du"]
+[ext_resource type="PackedScene" uid="uid://6f4gvsoxmprs" path="res://Entities/Weapons/Guns/HitscanGuns/hitscan_gun.tscn" id="1_62ord"]
+[ext_resource type="Resource" uid="uid://dk0vorbcv0tc8" path="res://Entities/Weapons/Guns/HitscanGuns/Rifles/M4A1/M4A1_weapon_resource.tres" id="2_ly6du"]
 [ext_resource type="Texture2D" uid="uid://gxijfrdq3e3m" path="res://Assets/TestWeapons/Polygon_Texture_vol2.png" id="3_rfajw"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_te1r4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0y7n"]
 albedo_color = Color(0.976471, 0.811765, 0.341176, 1)
 emission_enabled = true
 emission = Color(1, 1, 0.164706, 1)
 emission_energy_multiplier = 3.0
 
-[sub_resource type="Curve" id="Curve_te1r4"]
+[sub_resource type="Curve" id="Curve_hxley"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.655367, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_ul1sp"]
-curve = SubResource("Curve_te1r4")
+curve = SubResource("Curve_hxley")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sli3v"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s2vmf"]
 angle_min = 1.07288e-05
 angle_max = 1.07288e-05
 direction = Vector3(0, 0.105, -1)
@@ -27,7 +27,7 @@ initial_velocity_max = 8.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_ul1sp")
 
-[sub_resource type="BoxMesh" id="BoxMesh_ul1sp"]
+[sub_resource type="BoxMesh" id="BoxMesh_lqntn"]
 size = Vector3(0.03, 0.03, 0.03)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6omfq"]
@@ -57,7 +57,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_bj614"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_q0gry"]
 resource_name = "Root Scene_SM_Assault_Rifle_5,56"
 _surfaces = [{
 "aabb": AABB(-0.64924, -0.0461503, -0.033539, 0.915925, 0.216897, 0.0578308),
@@ -91,7 +91,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_gkedd"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_kgx4y"]
 resource_name = "Root Scene_SM_Fuse_For_Assault_Rifle_5,56"
 _surfaces = [{
 "aabb": AABB(-0.0066212, -0.00662121, -0.0204932, 0.0243459, 0.0132424, 0.0409865),
@@ -125,7 +125,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_si6t8"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_lurpc"]
 resource_name = "Root Scene_SM_Gate_For_Assault_Rifle_5,56"
 _surfaces = [{
 "aabb": AABB(-0.0420247, -0.00219845, -0.0176495, 0.0525201, 0.00447024, 0.0352991),
@@ -158,7 +158,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_of4ae"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_40ugq"]
 resource_name = "Root Scene_SM_Lid_Gate_For_Assault_Rifle_5,56"
 _surfaces = [{
 "aabb": AABB(-0.0380829, -0.000138356, -0.0132271, 0.0761604, 0.0155944, 0.0135486),
@@ -191,7 +191,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_xcxwh"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_uq6eo"]
 resource_name = "Root Scene_SM_Trigger_Guard_For_Assault_Rifle_5,56"
 _surfaces = [{
 "aabb": AABB(-0.00489299, -0.0369737, -0.00336728, 0.00970329, 0.0369737, 0.00673456),
@@ -236,7 +236,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_gbj6n"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_8qynm"]
 resource_name = "Root Scene_SM_Magazine_For_Assault_Rifle_5,56"
 _surfaces = [{
 "aabb": AABB(-0.0396802, -0.0887469, -0.0156709, 0.0804684, 0.166777, 0.0313418),
@@ -254,15 +254,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4vhyq")
 
-[node name="M4A1" node_paths=PackedStringArray("weapon_mesh", "muzzle_flash") instance=ExtResource("1_f1mxy")]
+[node name="M4A1_scene" node_paths=PackedStringArray("muzzle_flash", "weapon_mesh") instance=ExtResource("1_62ord")]
+muzzle_flash = NodePath("MuzzleFlash")
 weapon_resource = ExtResource("2_ly6du")
 weapon_mesh = NodePath("SM_Assault_Rifle_5,56")
-muzzle_flash = NodePath("MuzzleFlash")
 
 [node name="MuzzleFlash" type="GPUParticles3D" parent="." index="2"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.104334, -0.023613, -1.02545)
 layers = 2
-material_override = SubResource("StandardMaterial3D_te1r4")
+material_override = SubResource("StandardMaterial3D_h0y7n")
 cast_shadow = 0
 emitting = false
 lifetime = 0.07
@@ -270,41 +270,41 @@ one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_sli3v")
-draw_pass_1 = SubResource("BoxMesh_ul1sp")
+process_material = SubResource("ParticleProcessMaterial_s2vmf")
+draw_pass_1 = SubResource("BoxMesh_lqntn")
 
 [node name="SM_Assault_Rifle_5,56" type="MeshInstance3D" parent="." index="3"]
 transform = Transform3D(0.0819074, -0.0465745, -0.995551, -0.0696609, 0.996197, -0.052336, 0.994202, 0.0736377, 0.0783515, 0.163913, -0.2, -0.376754)
 layers = 2
-mesh = SubResource("ArrayMesh_bj614")
+mesh = SubResource("ArrayMesh_q0gry")
 skeleton = NodePath("")
 
 [node name="SM_Fuse_For_Assault_Rifle_5,56" type="MeshInstance3D" parent="SM_Assault_Rifle_5,56" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0400134, 0.105398, -0.00141808)
 layers = 2
-mesh = SubResource("ArrayMesh_gkedd")
+mesh = SubResource("ArrayMesh_kgx4y")
 skeleton = NodePath("")
 
 [node name="SM_Gate_For_Assault_Rifle_5,56" type="MeshInstance3D" parent="SM_Assault_Rifle_5,56" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0123279, 0.164664, -0.00141808)
 layers = 2
-mesh = SubResource("ArrayMesh_si6t8")
+mesh = SubResource("ArrayMesh_lurpc")
 skeleton = NodePath("")
 
 [node name="SM_Lid_Gate_For_Assault_Rifle_5,56" type="MeshInstance3D" parent="SM_Assault_Rifle_5,56" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.170774, 0.111423, -0.0186611)
 layers = 2
-mesh = SubResource("ArrayMesh_of4ae")
+mesh = SubResource("ArrayMesh_40ugq")
 skeleton = NodePath("")
 
 [node name="SM_Trigger_Guard_For_Assault_Rifle_5,56" type="MeshInstance3D" parent="SM_Assault_Rifle_5,56" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0870557, 0.094772, -0.00141808)
 layers = 2
-mesh = SubResource("ArrayMesh_xcxwh")
+mesh = SubResource("ArrayMesh_uq6eo")
 skeleton = NodePath("")
 
 [node name="SM_Magazine_For_Assault_Rifle_5,56" type="MeshInstance3D" parent="SM_Assault_Rifle_5,56" index="4"]
 transform = Transform3D(1, -2.23517e-08, 7.45058e-09, 0, 1, -1.11759e-08, 0, 2.79397e-09, 1, -0.171771, 0.038184, -0.00166452)
 layers = 2
-mesh = SubResource("ArrayMesh_gbj6n")
+mesh = SubResource("ArrayMesh_8qynm")
 skeleton = NodePath("")
