@@ -15,7 +15,6 @@ enum FireType {
 	DEFAULT = 0,
 	AUTOMATIC = 1,
 	SEMIAUTO = 2,
-	MELEE = 3
 }
 
 enum WeaponType {

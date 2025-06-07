@@ -90,7 +90,7 @@ func handle_death() -> void:
 	Input_Manager.enter_menu()
 	game_over_menu.game_over()
 
-## Signal functions
+## Signal handlers
 func _on_mouse_look(direction: Vector2) -> void:
 	mouse_motion = direction
 	

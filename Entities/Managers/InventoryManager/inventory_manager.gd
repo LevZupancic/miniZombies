@@ -7,7 +7,7 @@ const KNIFE_SLOTS: Array[int] = [WeaponSlot.KNIFE]
 const THROWABLE_SLOTS: Array[int] = [WeaponSlot.THROWABLE_1, WeaponSlot.THROWABLE_2, WeaponSlot.THROWABLE_3, WeaponSlot.THROWABLE_4]
 const SPECIAL_SLOTS: Array[int] = [WeaponSlot.SPECIAL_1, WeaponSlot.SPECIAL_2]
 
-var weapons: Array[Weapon]
+var weapons: Array[Weapon] = [null, null, null, null, null, null, null, null, null]
 var current_weapon: Weapon
 var current_slot: WeaponSlot
 
@@ -25,31 +25,10 @@ enum WeaponSlot {
 }
 
 func _ready() -> void:
-	weapons = [null, null, null, null, null, null, null, null, null]
+	Input_Manager.weapon_switch_requested.connect(_on_weapon_switch_requested)
+	Input_Manager.weapon_scroll_requested.connect(_on_weapon_scroll_requested)
 	equip_slot(WeaponSlot.MAIN_1)
 	current_slot = WeaponSlot.MAIN_1
-	
-func _unhandled_input(event: InputEvent) -> void:
-	# TODO Create separate input controller
-	for i: int in range(1, 10):
-		if event.is_action_pressed("num_" + str(i)):
-			var weapon_slot: int = i - 1
-			if weapon_slot != current_slot:
-				equip_slot(weapon_slot as WeaponSlot)
-				return
-	if event is InputEventMouseButton:
-		print(TAG, " got InputEventMouseButton")
-		if event.pressed:
-			print(TAG, " event.pressed")
-
-	if event.is_action_pressed("mouse_wheel_up"):
-		print(TAG, " got scroll up")
-		equip_slot(get_next_weapon_slot(1))
-		return
-	if event.is_action_pressed("mouse_wheel_down"):
-		print(TAG, " got scroll down")
-		equip_slot(get_next_weapon_slot(-1))
-		return
 
 func equip_slot(slot: WeaponSlot) -> void:
 	var weapon = weapons[slot]
@@ -158,6 +137,14 @@ func get_weapon_slot(weapon: Weapon) -> WeaponSlot:
 			return i as WeaponSlot
 	return -1 as WeaponSlot
 
+## Signal handlers
+func _on_weapon_switch_requested(slot) -> void:
+	var weapon_slot: int = slot
+	if weapon_slot != current_slot:
+		equip_slot(weapon_slot as WeaponSlot)
+
+func _on_weapon_scroll_requested(direction: int) -> void:
+	equip_slot(get_next_weapon_slot(direction))
 
 ## Utility functions
 func get_current_weapon() -> Weapon:

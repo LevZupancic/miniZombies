@@ -35,7 +35,8 @@ folder_colors={
 "res://Assets/": "yellow",
 "res://Common/": "orange",
 "res://Entities/": "blue",
-"res://Levels/": "green"
+"res://Entities/Managers/": "teal",
+"res://Levels/": "pink"
 }
 
 [input]
