@@ -4,7 +4,7 @@ class_name Hitscan_Gun extends Gun
 @export var sparks: PackedScene
 
 func _ready():
-	print("CooldownTimer exists: ", cooldown_timer != null)
+	pass
 
 func _process(delta: float) -> void:
 	if weapon_resource.fire_type ==  Weapon_Resource.FireType.AUTOMATIC:

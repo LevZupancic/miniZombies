@@ -14,19 +14,28 @@ const SPEED: float = 5.0
 
 var speed_multi: float = 1.0
 var mouse_motion: Vector2 = Vector2.ZERO
+var movement_direction: Vector2 = Vector2.ZERO
+var wants_jump: bool = false
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var hitpoints: int = max_hitpoints
 
 func _ready() -> void:
+	# Connect to InputManager signals
+	Input_Manager.mouse_look.connect(_on_mouse_look)
+	Input_Manager.menu_toggle_requested.connect(_on_pause_toggle)
+	Input_Manager.movement_requested.connect(_on_movement_requested)
+	Input_Manager.jump_requested.connect(_on_jump_requested)
+	Input_Manager.sprint_started.connect(_on_sprint_started)
+	Input_Manager.sprint_stopped.connect(_on_sprint_stopped)
+	# Set initial state
+	Input_Manager.enter_game()
+	
 	# Locks the mouse to screen, so you don't go off screen, and will always listen
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	var gun_scene = preload("res://Entities/Weapons/Guns/HitscanGuns/Rifles/M4A1/M4A1_scene.tscn")
 	inventory_manager.instantiate_weapon(gun_scene)
 	var gun_scene2 = preload("res://Entities/Weapons/Guns/HitscanGuns/Snipers/HuntingRifle/hunting_rifle_scene.tscn")
 	inventory_manager.instantiate_weapon(gun_scene2)
-
-
-	
 
 func _physics_process(delta: float) -> void:
 	handle_camera_rotation()
@@ -36,20 +45,12 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta * fall_multiplier
 
 	# Handle jump
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if wants_jump and is_on_floor():
 		velocity.y = sqrt(jump_height * 2.0 * gravity)
-		
-	# Handle sprint
-	if Input.is_action_pressed("sprint") and is_on_floor():
-		speed_multi = 2.0
-	else: 
-		speed_multi = 1.0
+		wants_jump = false
 		
 	var speed: float = SPEED * speed_multi
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var direction: Vector3 = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction: Vector3 = (transform.basis * Vector3(movement_direction.x, 0, movement_direction.y)).normalized()
 	
 	if direction:
 		velocity.x = direction.x * speed
@@ -59,19 +60,6 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
-
-func _input(event: InputEvent) -> void:
-	# TODO should be separate manager for input handling
-	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		if event is InputEventMouseMotion:
-			mouse_motion = -event.relative * 0.005
-		if event.is_action_pressed("ui_cancel"):
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-	elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-		if event.is_action_pressed("ui_cancel"):
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
 
 func handle_camera_rotation() -> void:
 	rotate_y(mouse_motion.x) # rotate camera left/right
@@ -99,4 +87,29 @@ func take_damage(damage: int) -> void:
 
 func handle_death() -> void:
 	print("died")
+	Input_Manager.enter_menu()
 	game_over_menu.game_over()
+
+## Signal functions
+func _on_mouse_look(direction: Vector2) -> void:
+	mouse_motion = direction
+	
+func _on_jump_requested() -> void:
+	if is_on_floor():
+		wants_jump = true
+
+func _on_sprint_started() -> void:
+	if is_on_floor():
+		speed_multi = 2.0
+		
+func _on_sprint_stopped() -> void:
+	speed_multi = 1.0
+
+func _on_movement_requested(direction: Vector2) -> void:
+	movement_direction = direction
+	
+func _on_pause_toggle() -> void:
+	if Input_Manager.is_in_game():
+		Input_Manager.enter_menu()
+	else:
+		Input_Manager.enter_game()

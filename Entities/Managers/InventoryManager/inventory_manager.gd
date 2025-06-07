@@ -7,7 +7,7 @@ const KNIFE_SLOTS: Array[int] = [WeaponSlot.KNIFE]
 const THROWABLE_SLOTS: Array[int] = [WeaponSlot.THROWABLE_1, WeaponSlot.THROWABLE_2, WeaponSlot.THROWABLE_3, WeaponSlot.THROWABLE_4]
 const SPECIAL_SLOTS: Array[int] = [WeaponSlot.SPECIAL_1, WeaponSlot.SPECIAL_2]
 
-var weapons: Array[Weapon] = [null, null, null, null, null, null, null, null, null]
+var weapons: Array[Weapon]
 var current_weapon: Weapon
 var current_slot: WeaponSlot
 
@@ -25,24 +25,42 @@ enum WeaponSlot {
 }
 
 func _ready() -> void:
+	weapons = [null, null, null, null, null, null, null, null, null]
 	equip_slot(WeaponSlot.MAIN_1)
+	current_slot = WeaponSlot.MAIN_1
 	
 func _unhandled_input(event: InputEvent) -> void:
 	# TODO Create separate input controller
 	for i: int in range(1, 10):
 		if event.is_action_pressed("num_" + str(i)):
-			equip_slot((i - 1) as WeaponSlot)
-			return
+			var weapon_slot: int = i - 1
+			if weapon_slot != current_slot:
+				equip_slot(weapon_slot as WeaponSlot)
+				return
+	if event is InputEventMouseButton:
+		print(TAG, " got InputEventMouseButton")
+		if event.pressed:
+			print(TAG, " event.pressed")
+
+	if event.is_action_pressed("mouse_wheel_up"):
+		print(TAG, " got scroll up")
+		equip_slot(get_next_weapon_slot(1))
+		return
+	if event.is_action_pressed("mouse_wheel_down"):
+		print(TAG, " got scroll down")
+		equip_slot(get_next_weapon_slot(-1))
+		return
 
 func equip_slot(slot: WeaponSlot) -> void:
 	var weapon = weapons[slot]
 	if weapon:
+		print(TAG, " Successfully equipping weapon in slot: ", slot)
 		current_slot = slot
 		equip_weapon(weapon)
 	else: 
 		print(TAG, " No weapon in slot: ", slot)
 
-func equip_weapon(weapon: Weapon) -> void:
+func equip_weapon(weapon: Weapon) -> void:	
 	if current_weapon:
 		current_weapon.visible = false
 		current_weapon.set_process(false)
@@ -52,7 +70,18 @@ func equip_weapon(weapon: Weapon) -> void:
 	weapon.visible = true
 	weapon.set_process(true)
 	weapon.set_active(true)
+
+func get_next_weapon_slot(direction: int) -> WeaponSlot:
+	var weapons_size: int = weapons.size()
+	var next_weapon: int = current_slot
 	
+	for i: int in range(weapons_size):
+		next_weapon = wrapi(next_weapon + direction, 0, weapons_size)
+		if (weapons[next_weapon] != null):
+			return next_weapon as WeaponSlot
+	return current_slot
+
+
 func instantiate_weapon(weapon_scene: PackedScene) -> void:
 	var existing_weapon: Weapon = find_weapon_by_scene(weapon_scene)
 	if existing_weapon:
@@ -65,7 +94,6 @@ func instantiate_weapon(weapon_scene: PackedScene) -> void:
 		add_weapon(weapon_instance)
 	else:
 		printerr(TAG, " Error: Could not instantiate weapon")
-
 
 func add_weapon(weapon: Weapon) -> void:
 	if not weapon or not weapon.weapon_resource:
@@ -129,6 +157,7 @@ func get_weapon_slot(weapon: Weapon) -> WeaponSlot:
 		if weapons[i] == weapon:
 			return i as WeaponSlot
 	return -1 as WeaponSlot
+
 
 ## Utility functions
 func get_current_weapon() -> Weapon:

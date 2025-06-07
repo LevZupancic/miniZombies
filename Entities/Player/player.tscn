@@ -148,6 +148,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
@@ -169,6 +170,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Crosshair" type="Control" parent="UI"]
 layout_mode = 2
@@ -184,6 +186,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="DamageTexture" type="TextureRect" parent="ScreenEffectController"]
 modulate = Color(1, 1, 1, 0)
@@ -200,6 +203,7 @@ offset_bottom = 254.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.625, 0.625)
+mouse_filter = 2
 texture = ExtResource("5_k53q1")
 
 [node name="DamageAnimation" type="AnimationPlayer" parent="ScreenEffectController/DamageTexture"]
@@ -220,6 +224,7 @@ offset_bottom = 527.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.58, 0.58)
+mouse_filter = 2
 texture = ExtResource("6_fhl08")
 
 [node name="HitAnimation" type="AnimationPlayer" parent="ScreenEffectController/HitTexture"]
@@ -229,3 +234,4 @@ libraries = {
 
 [node name="GameOverMenu" parent="." instance=ExtResource("7_vtle1")]
 visible = false
+mouse_filter = 2
