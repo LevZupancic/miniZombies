@@ -259,6 +259,9 @@ muzzle_flash = NodePath("MuzzleFlash")
 weapon_resource = ExtResource("2_ly6du")
 weapon_mesh = NodePath("SM_Assault_Rifle_5,56")
 
+[node name="CooldownTimer" type="Timer" parent="." index="0"]
+one_shot = true
+
 [node name="MuzzleFlash" type="GPUParticles3D" parent="." index="2"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.104334, -0.023613, -1.02545)
 layers = 2

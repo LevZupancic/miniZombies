@@ -5,12 +5,13 @@
 [resource]
 script = ExtResource("1_dljeo")
 name = "M4A1"
-weapon_type = 1
-fire_type = 1
+weapon_type = 0
+fire_type = 0
 damage = 15
 firerate = 15.0
 recoil = 0.05
 mag_size = 30
 max_ammo = 180
 price = 3000
+swap_time = 2.0
 metadata/_custom_type_script = "uid://dt3mt4p8y2hk4"

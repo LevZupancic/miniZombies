@@ -37,6 +37,9 @@ muzzle_flash = NodePath("MuzzleFlash")
 weapon_resource = ExtResource("2_rdfq6")
 weapon_mesh = NodePath("Rifle")
 
+[node name="CooldownTimer" type="Timer" parent="." index="0"]
+one_shot = true
+
 [node name="Rifle" parent="." index="2" instance=ExtResource("2_fosxo")]
 transform = Transform3D(0.0819074, -0.0465745, -0.995551, -0.0696609, 0.996197, -0.052336, 0.994202, 0.0736377, 0.0783515, 0.15, -0.2, -0.45)
 

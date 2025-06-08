@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Input_Manager="*res://Entities/Managers/InputManager/input_manager.gd"
+Input_Manager="*res://Common/Managers/InputManager/input_manager.gd"
 
 [debug]
 
@@ -33,9 +33,9 @@ window/size/viewport_height=720
 
 folder_colors={
 "res://Assets/": "yellow",
-"res://Common/": "orange",
+"res://Common/": "green",
+"res://Common/Managers/": "green",
 "res://Entities/": "blue",
-"res://Entities/Managers/": "teal",
 "res://Levels/": "pink"
 }
 

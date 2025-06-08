@@ -5,5 +5,12 @@
 [node name="Gun" type="Node3D"]
 script = ExtResource("1_2vokj")
 
-[node name="CooldownTimer" type="Timer" parent="."]
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 one_shot = true
+
+[node name="GunSwapTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timer_timeout"]

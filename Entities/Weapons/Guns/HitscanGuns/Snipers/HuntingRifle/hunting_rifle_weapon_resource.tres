@@ -5,12 +5,13 @@
 [resource]
 script = ExtResource("1_p6o7v")
 name = "Hunting rifle"
-weapon_type = 1
-fire_type = 2
+weapon_type = 0
+fire_type = 1
 damage = 40
 firerate = 2.0
 recoil = 0.1
 mag_size = 5
 max_ammo = 35
 price = 1100
+swap_time = 3.0
 metadata/_custom_type_script = "uid://dt3mt4p8y2hk4"
