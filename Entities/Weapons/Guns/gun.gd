@@ -25,7 +25,6 @@ func _ready() -> void:
 	Input_Manager.fire_requested.connect(_on_fire_requested)
 	Input_Manager.fire_released.connect(_on_fire_released)
 	Input_Manager.reload_requested.connect(_on_reload_requested)
-	
 	# Handle initialization
 	enter_idle()
 	mag_ammo = weapon_resource.mag_size
@@ -45,8 +44,7 @@ func _process(delta: float) -> void:
 		if current_state == GunState.IDLE && mag_ammo > 0:
 			handle_fire()
 		fire_input_just_pressed = false
-
-	
+		
 func handle_fire():
 	if weapon_resource.fire_type == Weapon_Resource.FireType.AUTOMATIC:
 			shoot()
@@ -64,17 +62,31 @@ func shoot() -> void:
 	weapon_mesh.position.z += weapon_resource.recoil
 	handle_hit()
 
-func reload() -> void:
+func start_reload() -> void:
 	enter_reloading()
 	reload_timer.start(weapon_resource.reload_time)
+
+func reload() -> void:
 	if reserve_ammo > weapon_resource.mag_size:
-		reserve_ammo -= weapon_resource.mag_size
+		reserve_ammo -= (weapon_resource.mag_size - mag_ammo)
 		mag_ammo = weapon_resource.mag_size
 	else:
 		mag_ammo = reserve_ammo
 		reserve_ammo = 0
-	
+	print(TAG, "Reloaded, mag: ", mag_ammo, ", reserve: ", reserve_ammo)
+	enter_idle()
 
+## Weapon overrides
+func handle_active() -> void:
+	print(TAG, " Became active: ", weapon_resource.name)
+	enter_idle()
+
+func handle_inactive() -> void:
+	shoot_cooldown_timer.stop()
+	reload_timer.stop()
+	enter_idle()
+	print(TAG, " Became inactive: ", weapon_resource.name)
+	
 ## State handlers
 func enter_firing() -> void:
 	print(TAG, " Entered firing ", weapon_resource.name)
@@ -108,7 +120,7 @@ func _on_fire_released() -> void:
 
 func _on_reload_requested() -> void:
 	if weapon_active && current_state == GunState.IDLE && reserve_ammo > 0:
-		reload()
+		start_reload()
 
 func _on_shoot_cooldown_timer_timeout() -> void:
 	if weapon_active && current_state == GunState.FIRING:
@@ -116,4 +128,4 @@ func _on_shoot_cooldown_timer_timeout() -> void:
 
 func _on_reload_timer_timeout() -> void:
 	if weapon_active && current_state == GunState.RELOADING:
-		enter_idle()
+		reload()
