@@ -81,6 +81,10 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_6qeso")
 draw_pass_1 = SubResource("BoxMesh_xghqf")
 
+[node name="GunSwapTimer" type="Timer" parent="." index="5"]
+unique_name_in_owner = true
+one_shot = true
+
 [editable path="Rifle"]
 [editable path="Rifle/Scope"]
 [editable path="Rifle/Mag"]

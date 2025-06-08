@@ -7,9 +7,13 @@ const KNIFE_SLOTS: Array[int] = [WeaponSlot.KNIFE]
 const THROWABLE_SLOTS: Array[int] = [WeaponSlot.THROWABLE_1, WeaponSlot.THROWABLE_2, WeaponSlot.THROWABLE_3, WeaponSlot.THROWABLE_4]
 const SPECIAL_SLOTS: Array[int] = [WeaponSlot.SPECIAL_1, WeaponSlot.SPECIAL_2]
 
+@onready var item_swap_to_timer: Timer = %ItemSwapToTimer
+@onready var item_swap_from_timer: Timer = %ItemSwapFromTimer
+
 var weapons: Array[Weapon] = [null, null, null, null, null, null, null, null, null]
 var current_weapon: Weapon
 var current_slot: WeaponSlot
+var target_weapon: Weapon
 
 enum WeaponSlot {
 	UNDEFINED = -1,
@@ -35,22 +39,33 @@ func equip_slot(slot: WeaponSlot) -> void:
 	if weapon:
 		print(TAG, " Successfully equipping weapon in slot: ", slot)
 		current_slot = slot
-		equip_weapon(weapon)
+		start_item_swap(weapon)
 	else: 
 		print(TAG, " No weapon in slot: ", slot)
 
-func equip_weapon(weapon: Weapon) -> void:
+func start_item_swap(weapon: Weapon) -> void:
+	# Stop any ongoing swap timers
+	item_swap_from_timer.stop()
+	item_swap_to_timer.stop()
+	
+	var swap_time: float = 1.0
 	if current_weapon:
+		swap_time = current_weapon.weapon_resource.swap_time / 2
 		current_weapon.visible = false
 		current_weapon.set_process(false)
 		current_weapon.set_active(false)
+		
+	target_weapon = weapon
+	item_swap_from_timer.start(swap_time)
+	# TODO play animation
+
+func equip_target() -> void:
+	item_swap_to_timer.start(target_weapon.weapon_resource.swap_time / 2)
+	current_weapon = target_weapon
+	target_weapon.visible = true
+	target_weapon.set_process(true)
 	
-	current_weapon = weapon
-	weapon.visible = true
-	weapon.set_process(true)
-	weapon.set_active(true)
-
-
+	
 func get_next_weapon_slot(direction: int) -> WeaponSlot:
 	var weapons_size: int = weapons.size()
 	var next_weapon: int = current_slot
@@ -138,6 +153,13 @@ func get_weapon_slot(weapon: Weapon) -> WeaponSlot:
 			return i as WeaponSlot
 	return -1 as WeaponSlot
 
+## Utility functions
+func get_current_weapon() -> Weapon:
+	return current_weapon
+
+func get_current_slot() -> int:
+	return current_slot
+
 ## Signal handlers
 func _on_weapon_switch_requested(slot) -> void:
 	var weapon_slot: int = slot
@@ -146,10 +168,9 @@ func _on_weapon_switch_requested(slot) -> void:
 
 func _on_weapon_scroll_requested(direction: int) -> void:
 	equip_slot(get_next_weapon_slot(direction))
+	
+func _on_item_swap_from_timer_timeout() -> void:
+	equip_target()
 
-## Utility functions
-func get_current_weapon() -> Weapon:
-	return current_weapon
-
-func get_current_slot() -> int:
-	return current_slot
+func _on_item_swap_to_timer_timeout() -> void:
+	current_weapon.set_active(true)

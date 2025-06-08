@@ -10,7 +10,6 @@ enum GunState {
 }
 
 @onready var shoot_cooldown_timer: Timer = %ShootCooldownTimer
-@onready var gun_swap_timer: Timer = %GunSwapTimer
 @onready var reload_timer: Timer = %ReloadTimer
 @onready var starting_weapon_position: Vector3 = weapon_mesh.position
 @export var muzzle_flash: GPUParticles3D
@@ -73,7 +72,7 @@ func reload() -> void:
 	else:
 		mag_ammo = reserve_ammo
 		reserve_ammo = 0
-	print(TAG, "Reloaded, mag: ", mag_ammo, ", reserve: ", reserve_ammo)
+	print(TAG, " Reloaded, mag: ", mag_ammo, ", reserve: ", reserve_ammo)
 	enter_idle()
 
 ## Weapon overrides
@@ -84,7 +83,7 @@ func handle_active() -> void:
 func handle_inactive() -> void:
 	shoot_cooldown_timer.stop()
 	reload_timer.stop()
-	enter_idle()
+	enter_swapping()
 	print(TAG, " Became inactive: ", weapon_resource.name)
 	
 ## State handlers
@@ -94,6 +93,7 @@ func enter_firing() -> void:
 
 func enter_idle() -> void:
 	print(TAG, " Entered idle ", weapon_resource.name)
+	print(TAG, " AMMO, mag: ", mag_ammo, ", reserve: ", reserve_ammo)
 	current_state = GunState.IDLE
 
 func enter_reloading() -> void:
@@ -110,7 +110,7 @@ func handle_hit() -> void:
 
 ## Signal handlers
 func _on_fire_requested() -> void:
-	if weapon_active:
+	if weapon_active && current_state == GunState.IDLE:
 		fire_input_just_pressed = true
 		fire_input_pressed = true
 

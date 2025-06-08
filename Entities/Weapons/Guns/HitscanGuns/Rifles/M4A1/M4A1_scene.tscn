@@ -311,3 +311,7 @@ transform = Transform3D(1, -2.23517e-08, 7.45058e-09, 0, 1, -1.11759e-08, 0, 2.7
 layers = 2
 mesh = SubResource("ArrayMesh_8qynm")
 skeleton = NodePath("")
+
+[node name="GunSwapTimer" type="Timer" parent="." index="5"]
+unique_name_in_owner = true
+one_shot = true
