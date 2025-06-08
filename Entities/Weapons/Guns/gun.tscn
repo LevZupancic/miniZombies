@@ -13,4 +13,8 @@ one_shot = true
 unique_name_in_owner = true
 one_shot = true
 
+[node name="ReloadTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

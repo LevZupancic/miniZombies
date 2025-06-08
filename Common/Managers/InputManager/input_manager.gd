@@ -6,15 +6,18 @@ enum InputState {
 }
 
 ## Signals
+# Player
 signal mouse_look(delta: Vector2)
-signal weapon_switch_requested(slot: int)
-signal weapon_scroll_requested(direction: int)
-signal fire_requested()
-signal fire_released()
 signal sprint_started()
 signal sprint_stopped()
 signal jump_requested()
 signal movement_requested(direction: Vector2)
+# Weapon
+signal weapon_switch_requested(slot: int)
+signal weapon_scroll_requested(direction: int)
+signal fire_requested()
+signal fire_released()
+signal reload_requested()
 
 signal menu_toggle_requested()
 
@@ -36,7 +39,16 @@ func _handle_active_input(event: InputEvent) -> void:
 	# Mouse look
 	if event is InputEventMouseMotion:
 		mouse_look.emit(-event.relative * mouse_sensitivity)
-		
+	
+	# Fire input
+	elif event.is_action_pressed("fire"):
+		fire_requested.emit()
+	elif event.is_action_released("fire"):
+		fire_released.emit()
+	
+	elif event.is_action_pressed("reload"):
+		reload_requested.emit()
+	
 	# Pause toggle
 	elif event.is_action_pressed("ui_cancel"):
 		menu_toggle_requested.emit()
@@ -47,11 +59,7 @@ func _handle_active_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("scroll_previous"):
 		weapon_scroll_requested.emit(-1)
 	
-	# Fire input
-	elif event.is_action_pressed("fire"):
-		fire_requested.emit()
-	elif event.is_action_released("fire"):
-		fire_released.emit()
+
 	
 	# Weapon number keys (1-9)
 	else:

@@ -14,4 +14,5 @@ mag_size = 30
 max_ammo = 180
 price = 3000
 swap_time = 2.0
+reload_time = 2.5
 metadata/_custom_type_script = "uid://dt3mt4p8y2hk4"

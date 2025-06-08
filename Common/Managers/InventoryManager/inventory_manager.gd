@@ -39,7 +39,7 @@ func equip_slot(slot: WeaponSlot) -> void:
 	else: 
 		print(TAG, " No weapon in slot: ", slot)
 
-func equip_weapon(weapon: Weapon) -> void:	
+func equip_weapon(weapon: Weapon) -> void:
 	if current_weapon:
 		current_weapon.visible = false
 		current_weapon.set_process(false)
@@ -49,6 +49,7 @@ func equip_weapon(weapon: Weapon) -> void:
 	weapon.visible = true
 	weapon.set_process(true)
 	weapon.set_active(true)
+
 
 func get_next_weapon_slot(direction: int) -> WeaponSlot:
 	var weapons_size: int = weapons.size()

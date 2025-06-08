@@ -11,6 +11,7 @@ class_name Weapon_Resource extends Resource
 @export var max_ammo: int
 @export var price: int
 @export var swap_time: float
+@export var reload_time: float
 
 enum FireType {
 	AUTOMATIC = 0,
