@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Global="*res://Common/Managers/GlobalManger/global_manager.gd"
 Input_Manager="*res://Common/Managers/InputManager/input_manager.gd"
 
 [debug]
