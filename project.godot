@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="MiniCodZombies"
-run/main_scene="uid://bgtow0o7a0ajg"
+run/main_scene="uid://clehjmealwmy4"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=300
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Common/Managers/GlobalManger/global_manager.gd"
+Game_Manager="*res://Common/Managers/GameManager/game_manager.gd"
 Input_Manager="*res://Common/Managers/InputManager/input_manager.gd"
 
 [debug]

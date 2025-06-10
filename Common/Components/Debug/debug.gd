@@ -8,7 +8,6 @@ const fps_ms: float = 16.0
 var properties: Array
 
 func _ready() -> void:
-	Global.debug = self
 	visible = enabled
 
 func add_debug_property(id: StringName, value, time_in_frames) -> void:
